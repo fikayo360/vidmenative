@@ -3,6 +3,7 @@
  import {View,SafeAreaView,TouchableOpacity,Text,Dimensions} from 'react-native'
  import { Video,ResizeMode } from 'expo-av';
 import React,{useState,useEffect} from "react";
+import { useNavigation } from '@react-navigation/native';
 import * as Font from 'expo-font'; 
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
@@ -11,6 +12,7 @@ import { useFonts } from "expo-font";
     const video = React.useRef(null);
     const windowWidth = Dimensions.get('window').width
     const [fontsLoaded, setFontsLoaded] = useState(false);
+    const navigation = useNavigation();
     const [loaded] = useFonts({
         Pattaya:require('../../../../../assets/fonts/Pattaya-Regular.ttf')
     })
@@ -18,6 +20,13 @@ import { useFonts } from "expo-font";
     if(!loaded){
         return null
     }
+
+    useEffect(() => {
+      setTimeout(() => {
+         navigation.navigate('Register')
+       }, 5000)
+     }, [])
+
     return(
     <View style={[styles.container,{}]}>
          

@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         flexDirection:'row'
     },
     txtInput:{
-        width:'60%'
+        width:'82%'
     },
     cta:{
         width:'96%',

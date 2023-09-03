@@ -13,6 +13,7 @@ import { useFonts } from "expo-font";
     const windowWidth = Dimensions.get('window').width
     const [fontsLoaded, setFontsLoaded] = useState(false);
     const navigation = useNavigation();
+  
     const [loaded] = useFonts({
         Pattaya:require('../../../../../assets/fonts/Pattaya-Regular.ttf')
     })
@@ -20,12 +21,6 @@ import { useFonts } from "expo-font";
     if(!loaded){
         return null
     }
-
-    useEffect(() => {
-      setTimeout(() => {
-         navigation.navigate('Register')
-       }, 5000)
-     }, [])
 
     return(
     <View style={[styles.container,{}]}>
@@ -42,7 +37,7 @@ import { useFonts } from "expo-font";
         resizeMode={ResizeMode.COVER}
       />
       <Text style={[styles.textHeader,{fontSize:windowWidth*0.1,fontWeight:'bold', top: windowWidth*0.3,left: windowWidth*0.3,fontFamily:'Pattaya'}]}>VID MATE</Text>
-      <TouchableOpacity style={[styles.cta,{bottom:windowWidth*0.2,height:windowWidth*0.15,borderRadius:windowWidth*0.4}]}>
+      <TouchableOpacity onPress={() => navigation.navigate('Register')} style={[styles.cta,{bottom:windowWidth*0.2,height:windowWidth*0.15,borderRadius:windowWidth*0.4}]}>
         <Text style={{fontSize:windowWidth*0.05,color:'#ffffff',fontWeight:'bold'}}>get started</Text></TouchableOpacity>
       </View>
     </View>)

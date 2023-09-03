@@ -9,18 +9,20 @@ import { useReducer } from 'react';
 import { useNavigation } from '@react-navigation/native'
 import axios from 'axios';
 import { storeToken} from '../../../../utils/tokenStorage';
+import useApp from "../../../common/hooks/useApp";
 
 
 const Login = () => {
     const windowWidth = Dimensions.get('screen').width
     const [passwordVisible,setPasswordVisible] = useState(true)
     const navigation = useNavigation()
+    const {login} = useApp()
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible)
     }
 
-    const api = new Auth
+    const api = new Auth()
     const initialState = {
         username: '',
         password: '',
@@ -55,11 +57,13 @@ const Login = () => {
             }
 
             const response = await api.Login(formData)
+            const {id,email,username,profile_pic} = response.data.user
+            const user = {id,email,username,profile_pic}
             const token = response.data.cookie
-            console.log(response.data);
+            login(user,token)
             await storeToken(token)
             dispatch({ type: 'reset' })
-            // navigation.navigate('Login')
+            navigation.navigate('tab')
         }catch(err){
             if (axios.isAxiosError(err)) {
                 console.log(err.response?.data);
@@ -100,6 +104,6 @@ const Login = () => {
             <Text style={{fontWeight:'bold',fontSize:windowWidth*0.04,color:'blue'}}>forgotPassword?</Text></TouchableOpacity>
     </ScrollView>
     )
-}
+}     
 
 export default Login

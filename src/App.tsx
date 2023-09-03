@@ -4,6 +4,8 @@ import {Splash, Login, Register, UpdatePassword, ChangePassword} from '../src/mo
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import axios from 'axios';
+import TabBar from './modules/video/components/tabNavigator/tabNavigation';
+
 axios.defaults.baseURL = 'https://vidme-2iex.onrender.com/';
 
 export default function App() {
@@ -17,6 +19,7 @@ export default function App() {
        <Stack.Screen name="Login" component={Login} options={{ headerShown: false,gestureEnabled: false }}/>
        <Stack.Screen name="ForgotPassword" component={UpdatePassword} options={{ headerShown: false,gestureEnabled: false }}/>
        <Stack.Screen name="ChangePassword" component={ChangePassword} options={{ headerShown: false,gestureEnabled: false }}/>
+       <Stack.Screen name="tab" component={TabBar} options={{ headerShown: false,gestureEnabled: false }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

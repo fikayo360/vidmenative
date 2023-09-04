@@ -9,7 +9,7 @@ import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 
  const Splash = () => {
-    const video = React.useRef(null);
+   
     const windowWidth = Dimensions.get('window').width
     const [fontsLoaded, setFontsLoaded] = useState(false);
     const navigation = useNavigation();
@@ -23,7 +23,7 @@ import { useFonts } from "expo-font";
     }
 
     return(
-    <View style={[styles.container,{}]}>
+    <SafeAreaView style={[styles.container,{}]}>
          
          <View style={{flex:1}}>
          <Video
@@ -36,11 +36,11 @@ import { useFonts } from "expo-font";
         isLooping
         resizeMode={ResizeMode.COVER}
       />
-      <Text style={[styles.textHeader,{fontSize:windowWidth*0.1,fontWeight:'bold', top: windowWidth*0.3,left: windowWidth*0.3,fontFamily:'Pattaya'}]}>VID MATE</Text>
+      <Text style={[styles.textHeader,{fontSize:windowWidth*0.13,fontWeight:'bold', top: windowWidth*0.2,left: '20%',fontFamily:'Pattaya'}]}>VID MATE</Text>
       <TouchableOpacity onPress={() => navigation.navigate('Register')} style={[styles.cta,{bottom:windowWidth*0.2,height:windowWidth*0.15,borderRadius:windowWidth*0.4}]}>
         <Text style={{fontSize:windowWidth*0.05,color:'#ffffff',fontWeight:'bold'}}>get started</Text></TouchableOpacity>
       </View>
-    </View>)
+    </SafeAreaView>)
 }
 
 export default Splash

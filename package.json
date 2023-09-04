@@ -26,6 +26,10 @@
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
     "react-native": "0.72.4",
+    "react-native-swiper": "^1.6.0",
+    "react-native-webview": "^13.5.1",
+    "react-native-youtube": "^2.0.2",
+    "react-native-youtube-iframe": "^2.3.0",
     "roboto": "^0.8.2",
     "typescript": "^5.1.3"
   },

@@ -8,6 +8,8 @@ import React,{useState,useEffect} from "react";
 import { useReducer } from 'react';
 import { useNavigation } from '@react-navigation/native'
 import axios from 'axios';
+import { BackHandler } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
 
 const Register = () => {
@@ -17,7 +19,7 @@ const Register = () => {
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible)
     }
-    const api = new Auth
+    const api = new Auth()
     const initialState = {
         username: '',
         email: '',
@@ -67,6 +69,14 @@ const Register = () => {
         }
       }
 
+      useFocusEffect(() => {
+        const handleBackPress = () => {
+          return true;
+        };
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+        return () => backHandler.remove();
+      });
+      
     return (
         <ScrollView style={[styles.container,{paddingTop:windowWidth*0.1}]}>
             <Text style={{fontSize:windowWidth*0.08,fontWeight:'bold',marginBottom:windowWidth*0.2,marginLeft:windowWidth*0.05,marginTop:windowWidth*0.07}}>Signup</Text>

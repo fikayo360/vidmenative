@@ -1,5 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { FontAwesome5 } from '@expo/vector-icons';
 import { TouchableOpacity,View,Dimensions,Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import useApp from '../../../common/hooks/useApp';
@@ -21,7 +22,7 @@ const TabBar = () => {
         left: 0,
         right: 0,
         elevation: 0,
-        height:'8%',
+        height:'6%',
         width: '100%',
         backgroundColor:theme==='dark'?'#1e1e1e':'white',
         alignItems: 'center'
@@ -42,7 +43,7 @@ const TabBar = () => {
                    tabBarIcon:({focused})=>{
                     return (
                     <View>
-                      <MaterialCommunityIcons name="home" size={windowWidth*0.08} color={focused?'#6153CC':theme==='dark'?'#fafafa':"black"} />
+                        <FontAwesome5 name="video" size={windowWidth*0.07} color={focused?'#6153CC':theme==='dark'?'#fafafa':"black"} />
                     </View>)
                    }
                   }}/>
@@ -54,7 +55,7 @@ const TabBar = () => {
                    tabBarIcon:({focused})=>{
                     return (
                     <TouchableOpacity onPress={remtoken}>
-                      <MaterialCommunityIcons name="logout" size={windowWidth*0.08} color={focused?'#6153CC':theme==='dark'?'#fafafa':"black"} />
+                      <MaterialCommunityIcons name="logout" size={windowWidth*0.07} color={focused?'#6153CC':theme==='dark'?'#fafafa':"black"} />
                     </TouchableOpacity>)
                    }
                   }}

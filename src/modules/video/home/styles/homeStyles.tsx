@@ -11,7 +11,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#9DD6EB'
-      }
+      },
+      video:{
+        width:'100%',height:'100%'
+    }
 })
 
 export default styles

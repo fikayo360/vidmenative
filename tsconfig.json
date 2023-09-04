@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["./react-navigation"],
+    "types": ["./react-navigation","./react-native-fullscreen-video"],
     "target": "es2016",
     "module": "commonjs",
     "rootDir": "./src",

@@ -23,9 +23,11 @@ const ChangePassword = () => {
     const [otp,setOtp] = useState('')
     const [newP,setNewP] = useState('')
     const [error,setError] = useState("")
+
     const clearError = () => {
       setError("")
     }
+    
     const [loading,setLoading] = useState(true)
     const submit = async() => {
         console.log(otp,email,newP);

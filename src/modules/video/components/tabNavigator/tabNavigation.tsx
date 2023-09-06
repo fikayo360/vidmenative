@@ -22,7 +22,7 @@ const TabBar = () => {
         left: 0,
         right: 0,
         elevation: 0,
-        height:'6%',
+        height:'5.5%',
         width: '100%',
         backgroundColor:theme==='dark'?'#1e1e1e':'white',
         alignItems: 'center'

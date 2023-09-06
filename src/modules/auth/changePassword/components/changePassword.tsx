@@ -59,7 +59,7 @@ const ChangePassword = () => {
         }
       }
 
-      SplashScreen.preventAutoHideAsync();
+      SplashScreen.preventAutoHideAsync()
 
       const [isLoaded] = useFonts({
         "Roboto": require("../../../../../assets/fonts/Roboto-Bold.ttf"),

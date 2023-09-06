@@ -2,28 +2,35 @@
  import styles from "../styles/splashStyle"
  import {View,SafeAreaView,TouchableOpacity,Text,Dimensions} from 'react-native'
  import { Video,ResizeMode } from 'expo-av';
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect,useCallback} from "react";
 import { useNavigation } from '@react-navigation/native';
-import * as Font from 'expo-font'; 
 import AppLoading from "expo-app-loading";
-import { useFonts } from "expo-font";
-
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
  const Splash = () => {
    
     const windowWidth = Dimensions.get('window').width
-    const [fontsLoaded, setFontsLoaded] = useState(false);
     const navigation = useNavigation();
   
-    const [loaded] = useFonts({
-        Pattaya:require('../../../../../assets/fonts/Pattaya-Regular.ttf')
-    })
+    SplashScreen.preventAutoHideAsync();
 
-    if(!loaded){
-        return null
+    const [isLoaded] = useFonts({
+      "Roboto": require("../../../../../assets/fonts/Roboto-Bold.ttf"),
+      "Pacifico": require("../../../../../assets/fonts/Pacifico-Regular.ttf")
+    });
+
+    const handleOnLayout = useCallback(async () => {
+      if (isLoaded) {
+        await SplashScreen.hideAsync(); //hide the splashscreen
+      }
+    }, [isLoaded]);
+    
+    if (!isLoaded) {
+      return null;
     }
 
     return(
-    <SafeAreaView style={[styles.container,{}]}>
+    <View onLayout={handleOnLayout} style={[styles.container]}>
          
          <View style={{flex:1}}>
          <Video
@@ -36,11 +43,11 @@ import { useFonts } from "expo-font";
         isLooping
         resizeMode={ResizeMode.COVER}
       />
-      <Text style={[styles.textHeader,{fontSize:windowWidth*0.13,fontWeight:'bold', top: windowWidth*0.2,left: '20%',fontFamily:'Pattaya'}]}>VID MATE</Text>
+      <Text style={[styles.textHeader,{color:'#FF1D15',fontSize:windowWidth*0.13, top: windowWidth*0.15,left: '10%',fontFamily:"Pacifico"}]}>VID MATE</Text>
       <TouchableOpacity onPress={() => navigation.navigate('Register')} style={[styles.cta,{bottom:windowWidth*0.2,height:windowWidth*0.15,borderRadius:windowWidth*0.4}]}>
-        <Text style={{fontSize:windowWidth*0.05,color:'#ffffff',fontWeight:'bold'}}>get started</Text></TouchableOpacity>
+        <Text style={{fontSize:windowWidth*0.05,color:'#ffffff',fontFamily:"Roboto"}}>get started</Text></TouchableOpacity>
       </View>
-    </SafeAreaView>)
+    </View>)
 }
 
 export default Splash

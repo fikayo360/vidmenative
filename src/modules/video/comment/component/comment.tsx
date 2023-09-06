@@ -13,7 +13,7 @@ const Comment = ({route}:any) => {
     const [refreshing, setRefreshing] = useState(false);
     const windowWidth = Dimensions.get('window').width
     const {currentUser} = useApp()
-    const [items,setItems] = useState([])
+    const [items,setItems] = useState<any>([])
     const [comment,setCom] = useState('')
     const onRefresh = useCallback(async()=>{
         setRefreshing(true);
@@ -23,14 +23,20 @@ const Comment = ({route}:any) => {
 
     const addComments = async () => {
         if (!comment){
+            console.log('fields cant be blank');
             return
         }
         let data = { videoId,
             username:currentUser.username,
             userPic:currentUser.profile_pic,
             comment}
+    
         try{
             const response = await video.addComment(data)
+            setItems([{ videoId,username:currentUser.username,userPic:currentUser.profile_pic,comment},...items])
+            setCom('')
+            console.log(response.data)
+            console.log(items);
         }catch(err){
             if (axios.isAxiosError(err)) {
                 console.log(err.response?.data);
@@ -38,27 +44,32 @@ const Comment = ({route}:any) => {
         }
     }
 
-    const getComments = async() => {
-        let data= videoId
-        try{
-            const response = await video.addComment(data)
-            setItems(response.data)
-        }catch(err){
-            if (axios.isAxiosError(err)) {
-                console.log(err.response?.data);
-              }
+    const getComments = useCallback(() => {
+        async() => {
+            let data = videoId
+            try{
+                const response = await video.getComments(data)
+                console.log(response.data);
+                setItems(response.data)
+            }catch(err){
+                if (axios.isAxiosError(err)) {
+                    console.log(err.response?.data);
+                  }
+            }
         }
-    }
+    },[])
     
+    useEffect(()=>{
+        getComments()
+    },[items])
+
     return (
         
             <View style={[styles.body,{paddingTop:windowWidth*0.04}]}>
             <View style={[styles.upperContainer,{height:windowWidth * 0.40,paddingTop:windowWidth*0.08,paddingRight:windowWidth*0.03}]}>
-            {currentUser.profile_pic?(<Image resizeMode='cover' style={{ width: windowWidth*0.1, height: windowWidth*0.1,borderRadius:windowWidth * 0.5 }} source={{ uri:currentUser.profile_pic}} />):
-            <ProfilePlaceholder username={'fikayo'} width={windowWidth*0.1} height={windowWidth*0.1}/>}
 
             <View style={[styles.textinputContainer,{height:windowWidth * 0.23,borderRadius:windowWidth* 0.01,
-            padding:windowWidth * 0.02,marginRight:windowWidth*0.03,marginLeft:windowWidth * 0.01}]}>
+            padding:windowWidth * 0.02,marginRight:windowWidth*0.03,marginLeft:windowWidth * 0.06}]}>
             <TextInput
             style={[styles.input,{fontSize:windowWidth * 0.05}]}
             multiline={true}
@@ -68,9 +79,9 @@ const Comment = ({route}:any) => {
             placeholderTextColor={'black'}
 
             /> 
-            <TouchableOpacity style={[styles.paperIconCont,{top:windowWidth * 0.04, right:windowWidth * 0.02}]} onPress={()=>{}}>
+            <TouchableOpacity onPress={addComments} style={[styles.paperIconCont,{top:windowWidth * 0.04, right:windowWidth * 0.02}]}>
             <FontAwesome name="paper-plane" size={windowWidth*0.06} color="black" />
-              </TouchableOpacity>
+            </TouchableOpacity>
             </View>
             </View>
             {items.length > 0 && ( 

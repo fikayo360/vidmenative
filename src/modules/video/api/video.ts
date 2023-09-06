@@ -11,6 +11,9 @@ interface likeData{
     videoId:string;
     username:string;
 }
+interface video{
+    videoId:string;
+}
 
 class Vid {
     public async Random(){

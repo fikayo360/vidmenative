@@ -4,10 +4,7 @@ import Vid from '../../api/video';
 import axios from "axios"
 import React,{useState,useEffect} from "react";
 import { WebView } from 'react-native-webview';
-import { FontAwesome } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import useApp from "../../../common/hooks/useApp";
-import { useNavigation } from "@react-navigation/native";
+
 
 interface Videoo{
     id:string;

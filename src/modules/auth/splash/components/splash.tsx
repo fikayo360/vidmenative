@@ -21,7 +21,7 @@ import * as SplashScreen from 'expo-splash-screen';
 
     const handleOnLayout = useCallback(async () => {
       if (isLoaded) {
-        await SplashScreen.hideAsync(); //hide the splashscreen
+        await SplashScreen.hideAsync(); 
       }
     }, [isLoaded]);
     

@@ -4,7 +4,6 @@
  import { Video,ResizeMode } from 'expo-av';
 import React,{useState,useEffect,useCallback} from "react";
 import { useNavigation } from '@react-navigation/native';
-import AppLoading from "expo-app-loading";
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
  const Splash = () => {
